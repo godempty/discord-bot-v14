@@ -2,14 +2,13 @@ const {
     SlashCommandBuilder,
     PermissionFlagsBits,
     CommandInteraction,
-    EmbedBuilder,
 } = require("discord.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("talk")
         .setDescription("我幫你說出來")
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages)
         .addStringOption(option =>
             option.setName('things')
                 .setDescription('what you want me to say')

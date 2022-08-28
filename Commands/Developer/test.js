@@ -17,7 +17,7 @@ module.exports = {
      */
 
     execute(interaction, client) {
-        client.emit('guildMemberAdd', interaction.member);
+        client.emit('guildCreate', interaction.guild);
         interaction.reply({
             content: `done`,
             ephemeral: true,

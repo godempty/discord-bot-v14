@@ -5,18 +5,17 @@ const{
 } = require('discord.js');
 
 module.exports = {
-    developer: true,
     data: new SlashCommandBuilder()
-    .setName('rolegiver')
-    .setDescription('make somebody have specific role')
+    .setName('roletaker')
+    .setDescription('take somebody\'s specific role')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addUserOption(option => 
         option.setName('user')
-        .setDescription('the member will have the role you choose')
+        .setDescription('the member who won\'t have the role anymore ')
         .setRequired(true))
     .addRoleOption(option => 
         option.setName('role')
-        .setDescription('the role the member will have')
+        .setDescription('the role the member won\'t no longer have')
         .setRequired(true)),
 
 
@@ -29,18 +28,17 @@ module.exports = {
     execute(interaction, client){
         const role = interaction.options.getRole('role');
         const user = interaction.options.getMember('user')
-        
-        if(user.roles.cache.some(r => r.name === role.name)){
+        user.roles.remove(role)
+        if(!user.roles.cache.some(r => r.name === role.name)){
             interaction.reply({
-                content:`${user}已經擁有${role}身分組`,
-                ephemeral: true,
+                content:`${user}沒有${role}身分組`,
+                ephemeral:true
             })
         }
         else{
-            user.roles.add(role)
             interaction.reply({
-                content: `成功給予${user}${role}身分組`,
-                ephemeral: true,
+                content: `成功刪除${user}的${role}身分組`,
+                ephemeral: true
             })
         }
     }

@@ -6,16 +6,19 @@ const {
 
 } = require("discord.js");
 const mongoose = require("mongoose");
-
 const User = require("../../Schemas/user");
 const Guild = require("../../Schemas/guild")
 
 module.exports = {
-    developer: true,
+    
     data: new SlashCommandBuilder()
         .setName("user")
         .setDescription("傳送位於資料庫的個人資訊")
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .addBooleanOption(option => 
+            option.setName('ephemeral')
+            .setDescription('是否限定成只有自己看的到')
+            .setRequired(true)),
 
     /**
      *
@@ -24,6 +27,7 @@ module.exports = {
 
     async execute(interaction, client) {
         const { user } = interaction;
+        const e = interaction.options.getBoolean('ephemeral');
         let userProfile = await User.findOne({
             GuildId: interaction.guild.id,
             UserId: user.id,
@@ -31,7 +35,9 @@ module.exports = {
         let guildProfile = await Guild.findOne({
             guildId: interaction.guild.id
         })
+        if(!guildProfile){
 
+        }
         if (!userProfile) {
             userProfile = await new User({
                 _id: mongoose.Types.ObjectId(),
@@ -39,6 +45,7 @@ module.exports = {
                 UserId: user.id,
                 userName: user.username,
                 lastupdate: Date.now(),
+                jointime: Date.now(),
                 money: 0,
                 bank: 0,
             });
@@ -53,6 +60,7 @@ module.exports = {
             .setFooter({text: `${user.tag} | 使用者資料`, iconURL: user.displayAvatarURL()})
             await interaction.reply({
                embeds:[embed],
+               ephemeral: e,
             });
             // console.log(userProfile);
         } else {
@@ -62,6 +70,7 @@ module.exports = {
             .setFooter({text: `${user.tag} | 使用者資料`, iconURL: user.displayAvatarURL()})
             await interaction.reply({
                 embeds:[embed],
+                ephemeral: e,
             }); 
             userProfile.lastupdate = Date.now();
             userProfile.save().catch(console.error);

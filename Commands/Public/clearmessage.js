@@ -8,7 +8,7 @@ const {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("clearmessage")
-        .setDescription("刪除輸入數字行的訊息")
+        .setDescription("刪除輸入數字行的訊息(兩周內)")
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .addIntegerOption(option =>
             option.setName('lines')
