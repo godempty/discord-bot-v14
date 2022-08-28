@@ -7,15 +7,15 @@ const{
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('rolegiver')
-    .setDescription('make somebody have specific role')
+    .setDescription('給特定對象指定身分組')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addUserOption(option => 
         option.setName('user')
-        .setDescription('the member will have the role you choose')
+        .setDescription('指定對象')
         .setRequired(true))
     .addRoleOption(option => 
         option.setName('role')
-        .setDescription('the role the member will have')
+        .setDescription('指定身分組')
         .setRequired(true)),
 
 

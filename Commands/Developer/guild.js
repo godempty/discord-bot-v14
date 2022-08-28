@@ -11,7 +11,7 @@ module.exports = {
     developer: true,
     data: new SlashCommandBuilder()
         .setName("guild")
-        .setDescription("傳送位於資料庫的伺服器資訊")
+        .setDescription("傳送位於資料庫的伺服器資訊並更新")
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
     /**

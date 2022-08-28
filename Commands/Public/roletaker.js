@@ -7,15 +7,15 @@ const{
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('roletaker')
-    .setDescription('take somebody\'s specific role')
+    .setDescription('刪除選擇對象的特定身分組')
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addUserOption(option => 
         option.setName('user')
-        .setDescription('the member who won\'t have the role anymore ')
+        .setDescription('選擇的對象')
         .setRequired(true))
     .addRoleOption(option => 
         option.setName('role')
-        .setDescription('the role the member won\'t no longer have')
+        .setDescription('選擇的身分組')
         .setRequired(true)),
 
 

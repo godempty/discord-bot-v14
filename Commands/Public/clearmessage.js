@@ -12,7 +12,7 @@ module.exports = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .addIntegerOption(option =>
             option.setName('lines')
-                .setDescription('how many lines you will deleted')
+                .setDescription('刪除幾行')
                 .setRequired(true))
         .addUserOption(option=>
             option.setName('target')
